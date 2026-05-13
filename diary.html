@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>✿ 碎碎念日记 ✿</title>
+    <style>
+        /* 为了方便，把主页相同的 CSS 完全复制过来 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: '宋体', 'SimSun', 'Tahoma', sans-serif; font-size: 12px; color: #8b8b8b; line-height: 1.6; letter-spacing: 1px; background-color: #f7fbf5; background-image: repeating-linear-gradient(transparent, transparent 19px, #dcebda 19px, #dcebda 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, #dcebda 19px, #dcebda 20px); cursor: url('images/my-cursor.png'), auto; 
+}
+
+ }
+        .container { width: 950px; margin: 20px auto; background-color: #ffffff; border: 1px solid #aebcaa; padding: 4px; outline: 3px double #dcebda; position: relative; }
+        
+        .header { 
+            height: 150px; 
+            background-color: #f2f7ef; 
+            background-image: 
+                radial-gradient(#dcebda 20%, transparent 20%), 
+                radial-gradient(#dcebda 20%, transparent 20%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            border: 1px dashed #c1d3bb; 
+            margin-bottom: 10px; 
+            position: relative; 
+            
+            /* 【修改点】不再使用 align-items: flex-end，改为让标题自由定位 */
+            display: block; 
+            padding: 20px; 
+        }
+    /* 看板娘图片 */
+        .anime-girl { 
+            position: absolute; 
+            right: 10px; 
+            bottom: 0; 
+            width: 180px;  /* 如果你的图很大，可以把这个调大，比如 220px */
+            height: 180px; 
+            background-image: url('images/anime-girl.png'); /* 确保路径正确 */
+            background-size: contain; 
+            background-repeat: no-repeat; 
+            background-position: bottom; 
+            z-index: 5; 
+        }
+/* 头部标题 */
+        .header h1 { 
+            font-family: '楷体', 'Verdana', sans-serif; 
+            font-size: 32px; 
+            color: #ffffff; 
+            text-shadow: -1px -1px 0 #aebcaa, 1px -1px 0 #aebcaa, -1px 1px 0 #aebcaa, 1px 1px 0 #aebcaa, 2px 2px 0px #eec4d0;
+            z-index: 10; 
+            position: relative;
+
+            /* 【修改点】标题全部往左移，并稍微往下靠一点点 */
+            text-align: left; 
+            margin-top: 40px; 
+            margin-left: 20px; 
+        }
+.layout { display: flex; gap: 10px; }
+        .sidebar-left { width: 160px; display: flex; flex-direction: column; gap: 10px; }
+        .nav-box { border: 1px solid #c1d3bb; background: #ffffff; padding: 5px; }
+        .box-title { text-align: center; font-weight: bold; letter-spacing: 2px; color: #aebcaa; border-bottom: 1px dashed #eec4d0; padding-bottom: 3px; margin-bottom: 5px; }
+        .nav-links a { display: block; text-decoration: none; color: #aebcaa; background: #faeef1; border: 1px solid #eec4d0; margin-bottom: 4px; padding: 4px 8px; font-size: 11px; }
+        .nav-links a:hover { background: #f2f7ef; border-color: #c1d3bb; color: #8b8b8b; }
+        .main-content { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .content-box { border: 1px solid #c1d3bb; padding: 15px; background: #ffffff; }
+        
+        /* 新增：日记专属样式 */
+        .diary-entry { border-bottom: 1px dashed #c1d3bb; padding-bottom: 15px; margin-bottom: 15px; }
+        .diary-date { background: #faeef1; display: inline-block; padding: 2px 10px; color: #eec4d0; font-weight: bold; border: 1px solid #eec4d0; border-radius: 3px; margin-bottom: 10px; }
+        .diary-title { font-weight: bold; color: #aebcaa; font-size: 14px; margin-bottom: 5px; }
+    </style>
+<style>
+    /* 星星闪烁动画 */
+    .star-twinkle {
+        position: fixed;
+        pointer-events: none; /* 确保不影响鼠标点击 */
+        z-index: 9999;
+        animation: fadeOut 2s forwards;
+    }
+    @keyframes fadeOut {
+        0% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1.2); }
+        100% { opacity: 0; transform: scale(0.8); }
+    }
+</style>
+
+<script>
+    function createStar() {
+        const star = document.createElement('img');
+        star.src = 'images/star.png'; // 请确保你的 images 文件夹里有这张图
+        star.className = 'star-twinkle';
+        
+        // 随机位置和大小
+        const size = Math.random() * 20 + 10 + 'px';
+        star.style.width = size;
+        star.style.left = Math.random() * window.innerWidth + 'px';
+        star.style.top = Math.random() * window.innerHeight + 'px';
+        
+        document.body.appendChild(star);
+        
+        // 动画结束后移除元素，防止页面卡顿
+        setTimeout(() => {
+            star.remove();
+        }, 2000);
+    }
+    // 每 500 毫秒生成一颗新星星
+    setInterval(createStar, 500);
+</script>
+
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>我的碎碎念日记本</h1>
+<div class="anime-girl"></div> <!-- 补上这个可爱的看板娘！ -->
+    </div>
+
+    <div class="layout">
+        <!-- 左侧导航 -->
+        <div class="sidebar-left">
+<!-- 新增：日历与时间栏 -->
+<div class="nav-box">
+    <div class="box-title">✿ 魔法时钟 ✿</div>
+    <div id="calendar-area" style="text-align: center; padding: 5px;">
+        <div id="current-date" style="color: #eec4d0; font-weight: bold; font-size: 14px;"></div>
+        <div id="current-time" style="color: #aebcaa; font-family: 'Courier New', monospace; font-size: 16px; margin-top: 5px;"></div>
+    </div>
+</div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const dateString = now.getFullYear() + "年" + (now.getMonth() + 1) + "月" + now.getDate() + "日";
+        const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
+                           now.getMinutes().toString().padStart(2, '0') + ":" + 
+                           now.getSeconds().toString().padStart(2, '0');
+        
+        document.getElementById('current-date').innerText = dateString;
+        document.getElementById('current-time').innerText = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+
+            <div class="nav-box">
+                <div class="box-title">✿ 网站导航 ✿</div>
+                <div class="nav-links">
+                    <a href="index.html">⇨ 返回首页</a>
+                    <a href="diary.html">✎ 碎碎念日记</a>
+                    <a href="guestbook.html">✉ 留言板互踩</a>
+<a href="about.html">♡ 关于我</a>
+                    <a href="links.html">★ 友情链接</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 中间的日记内容 -->
+        <div class="main-content">
+            <div class="content-box">
+                <h2 style="text-align: center; color: #eec4d0; margin-bottom: 20px;">~ 所有的心情都记录在这里 ~</h2>
+                
+                <!-- 第一篇日记 -->
+                <div class="diary-entry">
+                    <div class="diary-date">2026年5月13日 ☁️微风</div>
+                    <div class="diary-title">网页大改造！</div>
+                    <p>今天终于把网站彻底翻新啦！换上了我最喜欢的薄荷绿和草莓粉。学着做了超链接，原来只要把几个HTML文件连起来，网站就活了！看到鼠标移到按钮上会变色，心里满满的成就感。晚上打算再画一张二次元小头像放上去！</p>
+                </div>
+
+                <!-- 第二篇日记 -->
+                <div class="diary-entry">
+                    <div class="diary-date">2026年5月10日 ☀️晴天</div>
+                    <div class="diary-title">重温老番</div>
+                    <p>周末窝在家里补了《魔卡少女樱》，还是千禧年的赛璐璐画风最治愈人心呀。小樱的战斗服实在太可爱了，好想在自己的主页里也加一点星星和翅膀的元素。下午买了一杯去冰的薄荷巧克力奶茶，超幸福！</p>
+                    <!-- 你也可以在日记里插入图片 -->
+                    <img src="images/diary-pic.jpg" style="max-width: 200px; border: 2px solid #eec4d0; margin-top: 10px;" alt="配图">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

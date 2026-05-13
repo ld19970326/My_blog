@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>✿ 友情链接 | Links ✿</title>
+    <style>
+        /* 全局样式保持一致 */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: '宋体', 'SimSun', 'Tahoma', sans-serif; font-size: 12px; color: #8b8b8b; line-height: 1.6; letter-spacing: 1px; background-color: #f7fbf5; background-image: repeating-linear-gradient(transparent, transparent 19px, #dcebda 19px, #dcebda 20px), repeating-linear-gradient(90deg, transparent, transparent 19px, #dcebda 19px, #dcebda 20px); cursor: url('images/my-cursor.png'), auto; 
+}
+
+ }
+        .container { width: 950px; margin: 20px auto; background-color: #ffffff; border: 1px solid #aebcaa; padding: 4px; outline: 3px double #dcebda; position: relative; }
+        
+        /* 标题左移 + 波点 */
+        .header { height: 150px; background-color: #f2f7ef; background-image: radial-gradient(#dcebda 20%, transparent 20%), radial-gradient(#dcebda 20%, transparent 20%); background-size: 20px 20px; background-position: 0 0, 10px 10px; border: 1px dashed #c1d3bb; margin-bottom: 10px; position: relative; padding: 20px; display: block; }
+        .header h1 { font-family: '楷体', 'Verdana', sans-serif; font-size: 32px; color: #ffffff; text-shadow: -1px -1px 0 #aebcaa, 1px -1px 0 #aebcaa, -1px 1px 0 #aebcaa, 1px 1px 0 #aebcaa, 2px 2px 0px #eec4d0; z-index: 10; position: relative; text-align: left; margin-top: 40px; margin-left: 20px; }
+        .anime-girl { position: absolute; right: 10px; bottom: 0; width: 180px; height: 180px; background-image: url('images/anime-girl.png'); background-size: contain; background-repeat: no-repeat; background-position: bottom; z-index: 5; }
+        
+        .layout { display: flex; gap: 10px; }
+        .sidebar-left { width: 160px; }
+        .nav-box { border: 1px solid #c1d3bb; background: #ffffff; padding: 5px; margin-bottom: 10px;}
+        .box-title { text-align: center; font-weight: bold; letter-spacing: 2px; color: #aebcaa; border-bottom: 1px dashed #eec4d0; padding-bottom: 3px; margin-bottom: 5px; }
+        .nav-links a { display: block; text-decoration: none; color: #aebcaa; background: #faeef1; border: 1px solid #eec4d0; margin-bottom: 4px; padding: 4px 8px; font-size: 11px; }
+        .nav-links a:hover { background: #f2f7ef; border-color: #c1d3bb; color: #8b8b8b; }
+        
+        .main-content { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+        .content-box { border: 1px solid #c1d3bb; padding: 20px; background: #ffffff; min-height: 400px; }
+        
+        /* 友链特有样式 */
+        .link-grid { display: grid; grid-template-columns: repeat(auto-fill, 88px); gap: 15px; justify-content: center; margin-top: 20px; }
+        .link-btn { width: 88px; height: 31px; border: 1px solid #dcebda; transition: transform 0.2s; }
+        .link-btn:hover { transform: scale(1.1); border-color: #eec4d0; }
+        .banner-box { border: 1px dashed #eec4d0; padding: 15px; text-align: center; margin-bottom: 20px; background: #fffafb; }
+    </style>
+<style>
+    /* 星星闪烁动画 */
+    .star-twinkle {
+        position: fixed;
+        pointer-events: none; /* 确保不影响鼠标点击 */
+        z-index: 9999;
+        animation: fadeOut 2s forwards;
+    }
+    @keyframes fadeOut {
+        0% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1.2); }
+        100% { opacity: 0; transform: scale(0.8); }
+    }
+</style>
+
+<script>
+    function createStar() {
+        const star = document.createElement('img');
+        star.src = 'images/star.png'; // 请确保你的 images 文件夹里有这张图
+        star.className = 'star-twinkle';
+        
+        // 随机位置和大小
+        const size = Math.random() * 20 + 10 + 'px';
+        star.style.width = size;
+        star.style.left = Math.random() * window.innerWidth + 'px';
+        star.style.top = Math.random() * window.innerHeight + 'px';
+        
+        document.body.appendChild(star);
+        
+        // 动画结束后移除元素，防止页面卡顿
+        setTimeout(() => {
+            star.remove();
+        }, 2000);
+    }
+    // 每 500 毫秒生成一颗新星星
+    setInterval(createStar, 500);
+</script>
+
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>✿ 友情链接 ✿</h1>
+        <div class="anime-girl"></div>
+    </div>
+    <div class="layout">
+        <div class="sidebar-left">
+<!-- 新增：日历与时间栏 -->
+<div class="nav-box">
+    <div class="box-title">✿ 魔法时钟 ✿</div>
+    <div id="calendar-area" style="text-align: center; padding: 5px;">
+        <div id="current-date" style="color: #eec4d0; font-weight: bold; font-size: 14px;"></div>
+        <div id="current-time" style="color: #aebcaa; font-family: 'Courier New', monospace; font-size: 16px; margin-top: 5px;"></div>
+    </div>
+</div>
+
+<script>
+    function updateClock() {
+        const now = new Date();
+        const dateString = now.getFullYear() + "年" + (now.getMonth() + 1) + "月" + now.getDate() + "日";
+        const timeString = now.getHours().toString().padStart(2, '0') + ":" + 
+                           now.getMinutes().toString().padStart(2, '0') + ":" + 
+                           now.getSeconds().toString().padStart(2, '0');
+        
+        document.getElementById('current-date').innerText = dateString;
+        document.getElementById('current-time').innerText = timeString;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+</script>
+
+            <div class="nav-box">
+                <div class="box-title">✿ 网站导航 ✿</div>
+                <div class="nav-links">
+                    <a href="index.html">⇨ 返回首页</a>
+                    <a href="diary.html">✎ 碎碎念日记</a>
+                    <a href="guestbook.html">✉ 留言板互踩</a>
+                    <a href="about.html">♡ 关于我</a>
+                    <a href="links.html">★ 友情链接</a>
+                </div>
+            </div>
+        </div>
+        <div class="main-content">
+            <div class="content-box">
+                <div class="banner-box">
+                    <h3 style="color: #eec4d0;">★ 交换友链 ★</h3>
+                    <p style="font-size: 11px; margin-top:5px;">欢迎各位小仙女/小天才交换友链！只需在留言板告知我即可。<br>本站信息：TOMATO的小窝</p>
+                </div>
+
+                <h3 style="color: #aebcaa; border-left: 3px solid #f2f7ef; padding-left: 10px;">♡ 邻居们 (Buttons)</h3>
+                <div class="link-grid">
+                    <!-- 这里是你收集的 88x31 像素按钮图片 -->
+                    <a href="#"><img src="images/icon1.gif" class="link-btn" title="小幽"></a>
+                    <a href="#"><img src="images/icon2.gif" class="link-btn" title="仓鼠"></a>
+                    <a href="#"><img src="images/icon3.gif" class="link-btn" title="熊熊"></a>
+                    <div style="width:88px; height:31px; border:1px dotted #ccc; line-height:31px; text-align:center; font-size:9px;">虚位以待</div>
+                    <div style="width:88px; height:31px; border:1px dotted #ccc; line-height:31px; text-align:center; font-size:9px;">虚位以待</div>
+                </div>
+
+                <h3 style="color: #aebcaa; border-left: 3px solid #f2f7ef; padding-left: 10px; margin-top:30px;">♡ 常用去处 (Text Links)</h3>
+                <ul style="margin-left: 20px; margin-top:10px; color: #aebcaa;">
+                    <li><a href="#" style="color: #eec4d0;">Pinterest</a> - 灵感来源地</li>
+                    <li><a href="#" style="color: #eec4d0;">花瓣网</a> - 图片收集箱</li>
+                    <li><a href="#" style="color: #eec4d0;">Aseprite</a> - 像素画工具</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
